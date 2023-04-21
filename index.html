@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Challenge ONE - Encriptador de Texto</title> 
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    
+    <body>
+        <header>
+            <div class="caja">
+                <h1><img src="imagenes/logo1.png"></h1>
+                <input class="texto" type="text" value="Ingresa el texto aqui...">
+                </div>
+                    <button class="encriptar">Encriptar</button>
+                    <button class="desencriptar">Desencriptar</button>
+                </div>
+            <div>
+               
+        </header>
+        <script>
+            var input = document.querySelector("input");
+            input.focus();
+            var botonEncriptar = document.querySelector(".encriptar");
+            var botonDesencriptar = document.querySelector(".desencriptar");
+            var frase;
+
+            function encriptar(codigo,index){
+                    return ( frase.slice(0,index) + codigo + frase.slice(index+1,frase.length) );
+            }
+
+            function codificar(){
+                frase = input.value;
+                var codigo = "";
+                for(var i=0; i<frase.length;i++){
+                    console.log(frase[i]);
+                    switch(frase[i]){
+                        case "a":
+                            codigo = "ai";
+                        break;
+                        case "e":
+                            codigo = "enter";
+                        break;
+                        case "i":
+                            codigo = "imer";
+                        break;
+                        case "o":
+                            codigo = "ober";
+                        break;
+                        case "u":
+                            codigo = "ufat";
+                        break;
+                        default:
+                            codigo="";
+                        break;
+                    }
+                    console.log("Texto es: " + codigo);
+                    if(codigo.length > 0){
+                        frase = encriptar(codigo,i);
+                        i+= codigo.length-1;
+                    }
+                }
+                console.log(frase); 
+            }
+            botonEncriptar.onclick = codificar;
+
+            function decodificar(){
+                console.log("si entra");
+                frase = input.value; 
+                var cut;
+                for(var i = 0; i < frase.length; i++){
+                    var flag = false;
+                    console.log(frase[i]);
+                    switch(frase[i]){
+                        case "a":
+                            cut = frase.slice(i,i+2);
+                            if(cut == "ai"){
+                                flag=true;
+                                codigo = "a";
+                            }
+                        break;
+                        case "e":
+                            cut = frase.slice(i,i+5);
+                            if(cut == "enter"){
+                                flag=true;
+                                codigo = "e";
+                            }
+                        break;
+                        case "i":
+                            cut = frase.slice(i,i+4);
+                            if(cut == "imer"){
+                                flag=true;
+                                codigo = "i";
+                            }
+                        break;
+                        case "o":
+                            cut = frase.slice(i,i+4);
+                            if(cut == "ober"){
+                                flag=true;
+                                codigo = "o";
+                            }
+                        break;
+                        case "u":
+                            cut = frase.slice(i,i+4);
+                            if(cut == "ufat"){
+                                flag=true;
+                                codigo = "u";
+                            }
+                        break;
+                        default:
+                            codigo="";
+                        break;
+                    }
+                    console.log(cut);
+                    if(flag && codigo.length>0 ){
+                        frase = desencriptar(cut,codigo,i);
+                        i-= codigo.length-1;
+                    }
+                }
+                console.log(frase);
+            }
+
+            function desencriptar(cut,codigo,index){
+                return frase.replace(cut,codigo);
+            }
+
+            botonDesencriptar.onclick = decodificar;
+
+        </script>
+    </body>
+</html>
