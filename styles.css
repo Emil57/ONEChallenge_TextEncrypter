@@ -1,23 +1,41 @@
-header{
-    background-color: #F3F5FC;
+body{
+    background: #F3F5FC;
     padding: 40px;
-    width: 1440px;
-    height: 1024px;
-}
-.caja{
     width: 940px;
-    position: relative;
-    margin: 0 auto;
-}
-.texto{
-    margin: 40px 0 0 50px;
-    font-size: xx-large;
-    color: gray;
-    background-color: #F3F5FC;
-    border: none;
+    font-family: 'Montserrat', sans-serif;
 }
 
-button{
-    display: inline-block;
-    font-size: 15px;
+.cajas{
+    display: inline-flex;
+    margin: 0 auto;
+    width: 940px;
+    height: 540px;
+    position: relative;
+}
+
+.caja-entrada{
+    right: 30px;
+    width: 450px;
+    height: 540px;
+    position: bsolute;
+    margin: 50px 80px;
+    padding: 10px;
+    /* borders of each box*/
+    background: rgba(168, 254, 254, 0.3);
+    box-sizing: border-box;
+    border: 2px solid lightblue;
+    border-radius: 10px;
+}
+.texto, .texto-desencriptado{
+    margin: 40px 0 0 50px;
+    font-size: xx-large;
+    border: none;
+    background: transparent;
+    color: grey;
+}
+
+.encriptar{
+    font-weight: bold;
+    font-size: 20px;
+    display: flex;
 }
