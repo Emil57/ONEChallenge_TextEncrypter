@@ -1,49 +1,61 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
     <head>
         <meta charset="UTF-8">
         <title>Challenge ONE - Encriptador de Texto</title> 
         <link rel="stylesheet" href="reset.css">
         <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
     </head>
     
     <body>
-
-        <header>
-            <h1><img src="imagenes/logo1.png"></h1>       
+        <header class="encabezado">
+            <img id="logo" src="imagenes/logo1.png" alt="Logo de Alura Latam">
         </header>
 
         <main>
-            <div class="cajas">
+            <section class="caja-entrada">
+                <textarea id="mensaje-entrada" cols="30" rows="10" placeholder="Ingresa tu mensaje..."></textarea>
+                <div class="nota">
+                    <img id="signo-exclamacion" src="imagenes/Vector.png" alt="Signo de exclamacion">
+                    <p>Solo letras minúsculas y sin acentos</p>
+                </div> 
 
-                <section class="caja-entrada">
-                    <input class="texto" type="text" value="" placeholder="Ingresa tu texto aqui...">  
-                    <button class="encriptar">Encriptar</button>
-                    <button class="desencriptar">Desencriptar</button>      
-                </section>
+                <div class="botones">
+                    <button id="encriptar">Encriptar</button>
+                    <button id="desencriptar">Desencriptar</button>
+                </div>
 
-                <section class="caja-salida">
-                    <label class="texto-desencriptado">Texto Desencriptado...</label>
-                </section>
-            </div> 
+            </section>
+            
+            <section class="caja-salida">
+                <textarea id="texto-salida" cols="30" rows="10"></textarea>
+                <p id="mensaje-salida1">Ningún mensaje fue encontrado</p>
+                <p id="mensaje-salida2">Ingresa el texto que desees encriptar o desencriptar.</p>
+                <button id="copiar">Copiar</button>
+            </section>
         </main>
 
         <script>
-            var input = document.querySelector("input");
+            var input = document.querySelector("#mensaje-entrada");
+            var output = document.querySelector("#texto-salida");
             input.focus();
-            var botonEncriptar = document.querySelector(".encriptar");
-            var botonDesencriptar = document.querySelector(".desencriptar");
+            var btnEncriptar = document.querySelector("#encriptar");
+            var btnDesencriptar = document.querySelector("#desencriptar");
             var frase;
+            var btnCopiar = document.querySelector("#copiar");
 
             function encriptar(codigo,index){
                     return ( frase.slice(0,index) + codigo + frase.slice(index+1,frase.length) );
             }
-
             function codificar(){
                 frase = input.value;
                 var codigo = "";
                 for(var i=0; i<frase.length;i++){
-                    console.log(frase[i]);
+                    //console.log(frase[i]);
                     switch(frase[i]){
                         case "a":
                             codigo = "ai";
@@ -64,23 +76,26 @@
                             codigo="";
                         break;
                     }
-                    console.log("Texto es: " + codigo);
+                    //console.log("Texto es: " + codigo);
                     if(codigo.length > 0){
                         frase = encriptar(codigo,i);
                         i+= codigo.length-1;
+                        console.log("Frase es: " + frase);
                     }
                 }
-                console.log(frase); 
+                //console.log(frase);
+                revisarMensaje();
+
             }
-            botonEncriptar.onclick = codificar;
+            //btnEncriptar.addEventListener('click',  codificar());  
 
             function decodificar(){
-                console.log("si entra");
-                frase = input.value; 
+                frase = input.value;
+                console.log("Entra: "+ frase);
                 var cut;
                 for(var i = 0; i < frase.length; i++){
                     var flag = false;
-                    console.log(frase[i]);
+                    //console.log(frase[i]);
                     switch(frase[i]){
                         case "a":
                             cut = frase.slice(i,i+2);
@@ -121,20 +136,47 @@
                             codigo="";
                         break;
                     }
-                    console.log(cut);
-                    if(flag && codigo.length>0 ){
-                        frase = desencriptar(cut,codigo,i);
+                    //console.log(cut);
+                    if(flag && codigo.length > 0 ){
+                        frase = desencriptar(cut, codigo, i);
                         i-= codigo.length-1;
                     }
                 }
-                console.log(frase);
+                revisarMensaje();
             }
-
             function desencriptar(cut,codigo,index){
                 return frase.replace(cut,codigo);
             }
 
-            botonDesencriptar.onclick = decodificar;
+            function copy() {
+                output.select();
+                document.execCommand("copy");
+                //console.log("Copied to Clipboard!");
+            } 
+            function revisarMensaje(){
+                output.value = frase;
+                input.value = '';
+                var cajaSalida = document.querySelector(".caja-salida");
+                var mensajeSalida1 = document.querySelector("#mensaje-salida1");
+                var mensajeSalida2 = document.querySelector("#mensaje-salida2");
+
+                if(output.value != ''){
+                    cajaSalida.style.backgroundImage = 'none';
+                    btnCopiar.style.display = 'block';
+                    mensajeSalida1.style.display = 'none';
+                    mensajeSalida2.style.display = 'none';
+                }
+                else{
+                    btnCopiar.style.display = 'none';
+                    mensajeSalida1.style.display = 'block';
+                    mensajeSalida2.style.display = 'block';
+                    cajaSalida.style.backgroundImage = 'url("imagenes/Muneco.png")'; 
+                }          
+            }
+
+            btnEncriptar.onclick = codificar;
+            btnDesencriptar.onclick = decodificar;
+            btnCopiar.onclick = copy;
 
         </script>
 
