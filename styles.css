@@ -155,11 +155,18 @@ main{
     display: none;
 }
 
-
-
-
-
-
-
-
-
+@media screen and (max-width:480px){
+    header{
+        margin: 25px 40px;
+    }
+    #logo{
+        width: 35%;
+    }
+    main{
+        display: inline-block;
+    }
+    .caja-entrada{
+        margin: 0;
+        width: 500px;
+    }
+}
