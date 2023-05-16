@@ -191,45 +191,43 @@ main{
         margin: 0;
         margin-top: 20px;
         padding: 0;
-        width: inherit;
+        width: 400px;
         height: 150px;
         background-image: none;
         position: inherit;
+        display: flex;
+        flex-direction: column;
 
     }
     .caja-salida >* {
-        display: flex;
-        flex-direction: column;
         top: 0;
         left: 0;
     }
     #texto-salida{
-        width: 400px;
-        height: auto;
-        margin: 20px;
+        width: 380px;
+        margin: 10px;
         font-size: 18px;
         font-weight: 600;
         display: none;
     }
-    #mensaje-salida1{
-        position: relative;
-        top: 30px;
-    }
-    #mensaje-salida2{
-        position: relative;
-        top: 0;
+    #mensaje-salida1, #mensaje-salida2{
+        top: 20px;
+        line-height: 1.2;
+        margin: 0;
     }
 
     #copiar{
         margin: 0;
-        width: 90%;
-        display: flex;
-        top: 30px;
+        width: 100%;
+        position: relative;
+        top: 75px;
         left: 0;
         justify-content: center;
         align-content: center;
         flex-wrap: wrap;
+        height: 250px;
         display: none;
+
     }
 
 }

@@ -180,8 +180,18 @@
                 else{
                     //Mobile
                     if(output.value != ''){
-                        textoSalida.style.display = 'block';
-
+                        textoSalida.style.display = 'flex';
+                        cajaSalida.style.display = 'flex';
+                        cajaSalida.style.height = '150px';
+                        mensajeSalida1.style.display = 'none';
+                        mensajeSalida2.style.display = 'none';
+                        btnCopiar.style.display = 'flex';
+                    }
+                    else{
+                        mensajeSalida1.style.display = 'flex';
+                        mensajeSalida2.style.display = 'flex';
+                        textoSalida.style.display = 'none';
+                        btnCopiar.style.display = 'none';
                     }
                 }
 
