@@ -160,19 +160,32 @@
                 var cajaSalida = document.querySelector(".caja-salida");
                 var mensajeSalida1 = document.querySelector("#mensaje-salida1");
                 var mensajeSalida2 = document.querySelector("#mensaje-salida2");
+                var textoSalida = document.querySelector("#texto-salida");
 
-                if(output.value != ''){
-                    cajaSalida.style.backgroundImage = 'none';
-                    btnCopiar.style.display = 'block';
-                    mensajeSalida1.style.display = 'none';
-                    mensajeSalida2.style.display = 'none';
+                if(screen.width > 480){
+                    //Desktop computer
+                    if(output.value != ''){
+                        cajaSalida.style.backgroundImage = 'none';
+                        btnCopiar.style.display = 'block';
+                        mensajeSalida1.style.display = 'none';
+                        mensajeSalida2.style.display = 'none';
+                    }
+                    else{
+                        btnCopiar.style.display = 'none';
+                        mensajeSalida1.style.display = 'block';
+                        mensajeSalida2.style.display = 'block';
+                        cajaSalida.style.backgroundImage = 'url("imagenes/Muneco.png")'; 
+                    } 
                 }
                 else{
-                    btnCopiar.style.display = 'none';
-                    mensajeSalida1.style.display = 'block';
-                    mensajeSalida2.style.display = 'block';
-                    cajaSalida.style.backgroundImage = 'url("imagenes/Muneco.png")'; 
-                }          
+                    //Mobile
+                    if(output.value != ''){
+                        textoSalida.style.display = 'block';
+
+                    }
+                }
+
+                
             }
 
             btnEncriptar.onclick = codificar;

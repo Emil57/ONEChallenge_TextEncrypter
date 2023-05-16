@@ -7,17 +7,14 @@
     line-height: 125%;
 }
 header{
-    width: auto;
+    width: 1440px;
     margin: 20px 100px;
 }
-#logo{
-    width: auto;
-}
+
 main{
     display: flex;
     margin: 0 auto;
     padding:0 200px;
-    max-width: 1200px;
 }
 #mensaje-entrada{
     width: 750px;
@@ -155,18 +152,84 @@ main{
     display: none;
 }
 
-@media screen and (max-width:480px){
+@media screen and (max-width:450px) {
+    *{
+        margin: 0;
+        padding: 0;
+        width: auto;
+        max-width: 450px;
+    }
     header{
-        margin: 25px 40px;
+        margin: 40px 20px;
+        left: 10px;
+        top: 20px;
     }
     #logo{
-        width: 35%;
+        width: 7%;
     }
+
     main{
-        display: inline-block;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        align-items: center;
+        flex-wrap: wrap;
     }
-    .caja-entrada{
+    .main > *{
+        width: inherit;
+        height: auto;
+    }
+
+    #mensaje-entrada{
+        padding-left:20px;
+        height: auto;
+        width: auto;
+    }
+
+    .caja-salida{
         margin: 0;
-        width: 500px;
+        margin-top: 20px;
+        padding: 0;
+        width: inherit;
+        height: 150px;
+        background-image: none;
+        position: inherit;
+
     }
+    .caja-salida >* {
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+    }
+    #texto-salida{
+        width: 400px;
+        height: auto;
+        margin: 20px;
+        font-size: 18px;
+        font-weight: 600;
+        display: none;
+    }
+    #mensaje-salida1{
+        position: relative;
+        top: 30px;
+    }
+    #mensaje-salida2{
+        position: relative;
+        top: 0;
+    }
+
+    #copiar{
+        margin: 0;
+        width: 90%;
+        display: flex;
+        top: 30px;
+        left: 0;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        display: none;
+    }
+
 }
