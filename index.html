@@ -19,7 +19,7 @@
 
         <main>
             <section class="caja-entrada">
-                <textarea id="mensaje-entrada" cols="30" rows="10" placeholder="Ingresa tu mensaje..."></textarea>
+                <textarea id="mensaje-entrada" cols="30" rows="10" placeholder="Ingresa tu mensaje..." onkeyup='this.value=this.value.toLowerCase();'></textarea>
                 <div class="nota">
                     <img id="signo-exclamacion" src="imagenes/Vector.png" alt="Signo de exclamacion">
                     <p>Solo letras minúsculas y sin acentos</p>
@@ -53,97 +53,98 @@
                     return ( frase.slice(0,index) + codigo + frase.slice(index+1,frase.length) );
             }
             function codificar(){
-                frase = input.value;
-                var codigo = "";
-                for(var i=0; i<frase.length;i++){
-                    //console.log(frase[i]);
-                    switch(frase[i]){
-                        case "a":
-                            codigo = "ai";
-                        break;
-                        case "e":
-                            codigo = "enter";
-                        break;
-                        case "i":
-                            codigo = "imer";
-                        break;
-                        case "o":
-                            codigo = "ober";
-                        break;
-                        case "u":
-                            codigo = "ufat";
-                        break;
-                        default:
-                            codigo="";
-                        break;
+                if(!revisarAcentos()){
+                    var codigo = "";
+                    for(var i=0; i<frase.length;i++){
+                        //console.log(frase[i]);
+                        switch(frase[i]){
+                            case "a":
+                                codigo = "ai";
+                            break;
+                            case "e":
+                                codigo = "enter";
+                            break;
+                            case "i":
+                                codigo = "imer";
+                            break;
+                            case "o":
+                                codigo = "ober";
+                            break;
+                            case "u":
+                                codigo = "ufat";
+                            break;
+                            default:
+                                codigo="";
+                            break;
+                        }
+                        //console.log("Texto es: " + codigo);
+                        if(codigo.length > 0){
+                            frase = encriptar(codigo,i);
+                            i+= codigo.length-1;
+                            console.log("Frase es: " + frase);
+                        }
                     }
-                    //console.log("Texto es: " + codigo);
-                    if(codigo.length > 0){
-                        frase = encriptar(codigo,i);
-                        i+= codigo.length-1;
-                        console.log("Frase es: " + frase);
-                    }
+                    //console.log(frase);
+                    revisarMensaje();
                 }
-                //console.log(frase);
-                revisarMensaje();
-
             }
-            //btnEncriptar.addEventListener('click',  codificar());  
 
             function decodificar(){
-                frase = input.value;
-                console.log("Entra: "+ frase);
-                var cut;
-                for(var i = 0; i < frase.length; i++){
-                    var flag = false;
-                    //console.log(frase[i]);
-                    switch(frase[i]){
-                        case "a":
-                            cut = frase.slice(i,i+2);
-                            if(cut == "ai"){
-                                flag=true;
-                                codigo = "a";
-                            }
-                        break;
-                        case "e":
-                            cut = frase.slice(i,i+5);
-                            if(cut == "enter"){
-                                flag=true;
-                                codigo = "e";
-                            }
-                        break;
-                        case "i":
-                            cut = frase.slice(i,i+4);
-                            if(cut == "imer"){
-                                flag=true;
-                                codigo = "i";
-                            }
-                        break;
-                        case "o":
-                            cut = frase.slice(i,i+4);
-                            if(cut == "ober"){
-                                flag=true;
-                                codigo = "o";
-                            }
-                        break;
-                        case "u":
-                            cut = frase.slice(i,i+4);
-                            if(cut == "ufat"){
-                                flag=true;
-                                codigo = "u";
-                            }
-                        break;
-                        default:
-                            codigo="";
-                        break;
+                if(!revisarAcentos()){
+                    //console.log("Entra: "+ frase);
+                    var cut;
+                    for(var i = 0; i < frase.length; i++){
+                        var flag = false;
+                        //console.log(frase[i]);
+                        switch(frase[i]){
+                            case "a":
+                                cut = frase.slice(i,i+2);
+                                if(cut == "ai"){
+                                    flag=true;
+                                    codigo = "a";
+                                }
+                            break;
+                            case "e":
+                                cut = frase.slice(i,i+5);
+                                if(cut == "enter"){
+                                    flag=true;
+                                    codigo = "e";
+                                }
+                            break;
+                            case "i":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "imer"){
+                                    flag=true;
+                                    codigo = "i";
+                                }
+                            break;
+                            case "o":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "ober"){
+                                    flag=true;
+                                    codigo = "o";
+                                }
+                            break;
+                            case "u":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "ufat"){
+                                    flag=true;
+                                    codigo = "u";
+                                }
+                            break;
+                            default:
+                                codigo="";
+                            break;
+                        }
+                        //console.log(cut);
+                        if(flag && codigo.length > 0 ){
+                            frase = desencriptar(cut, codigo, i);
+                            i-= codigo.length-1;
+                        }
                     }
-                    //console.log(cut);
-                    if(flag && codigo.length > 0 ){
-                        frase = desencriptar(cut, codigo, i);
-                        i-= codigo.length-1;
-                    }
+                    revisarMensaje();
                 }
-                revisarMensaje();
+                
             }
             function desencriptar(cut,codigo,index){
                 return frase.replace(cut,codigo);
@@ -161,7 +162,6 @@
                 var mensajeSalida1 = document.querySelector("#mensaje-salida1");
                 var mensajeSalida2 = document.querySelector("#mensaje-salida2");
                 var textoSalida = document.querySelector("#texto-salida");
-
                 if(screen.width > 480){
                     //Desktop computer
                     if(output.value != ''){
@@ -197,7 +197,17 @@
 
                 
             }
-
+            function revisarAcentos(){
+                frase = input.value;
+                for(var i=0; i<frase.length; i++){
+                    //console.log("Revisando " + frase[i]);
+                    if(frase[i] =="á" ||frase[i]=="é"  ||frase[i]=="í" ||frase[i]=="ó" ||frase[i]=="ú"){
+                        alert("Error. No se permiten acentos.");
+                        return true;
+                    }
+                }
+                return false;
+            }
             btnEncriptar.onclick = codificar;
             btnDesencriptar.onclick = decodificar;
             btnCopiar.onclick = copy;
