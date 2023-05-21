@@ -152,12 +152,12 @@ main{
     display: none;
 }
 
-@media screen and (max-width:450px) {
+@media screen and (max-width:414px) {
     *{
         margin: 0;
         padding: 0;
         width: auto;
-        max-width: 450px;
+        max-width: 414px;
     }
     header{
         margin: 40px 20px;
@@ -220,7 +220,7 @@ main{
         margin: 0;
         width: 100%;
         position: relative;
-        top: 75px;
+        top: 60px;
         left: 0;
         justify-content: center;
         align-content: center;

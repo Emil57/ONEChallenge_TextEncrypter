@@ -162,8 +162,10 @@
                 var mensajeSalida1 = document.querySelector("#mensaje-salida1");
                 var mensajeSalida2 = document.querySelector("#mensaje-salida2");
                 var textoSalida = document.querySelector("#texto-salida");
-                if(screen.width > 480){
+                console.log("Screen width: " + screen.width);
+                if(screen.width > 414){
                     //Desktop computer
+                    console.log("Entra desktop");
                     if(output.value != ''){
                         cajaSalida.style.backgroundImage = 'none';
                         btnCopiar.style.display = 'block';
@@ -179,6 +181,7 @@
                 }
                 else{
                     //Mobile
+                    console.log("Entra movil");
                     if(output.value != ''){
                         textoSalida.style.display = 'flex';
                         cajaSalida.style.display = 'flex';
