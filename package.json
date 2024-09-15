@@ -1,7 +1,7 @@
 {
     "name": "web-app",
-    "version": "1.0.0",
-    "description": "A static site deployed to GitHub Pages",
+    "version": "1.1.0",
+    "description": "New version of my webpage to Pages",
     "scripts": {
       "build": "echo 'No build step required'",
       "start": "echo 'No start script required'"
