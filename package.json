@@ -1,0 +1,14 @@
+{
+    "name": "web-app",
+    "version": "1.1.0",
+    "description": "New version of my webpage to Pages",
+    "scripts": {
+      "build": "echo 'No build step required'",
+      "start": "echo 'No start script required'"
+    },
+    "dependencies": {},
+    "devDependencies": {},
+    "author": "Emil57",
+    "license": "ISC"
+  }
+  
