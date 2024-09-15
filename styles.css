@@ -1,0 +1,233 @@
+*{
+    background: #E9ECF8;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 125%;
+}
+header{
+    width: 1440px;
+    margin: 20px 100px;
+}
+
+main{
+    display: flex;
+    margin: 0 auto;
+    padding:0 200px;
+}
+#mensaje-entrada{
+    width: 750px;
+    height: 600px;  
+    border: none;
+    font-size: 24px;
+    color: #0A3871;
+    font-weight: 600;
+}
+
+#mensaje-entrada:focus{
+    outline: none;
+}
+.nota{
+    margin-left: 25px;
+}
+.nota > *{
+    display: inline-block;
+    vertical-align: middle;
+}
+#signo-exclamacion{
+    width: 2.5%;
+}
+.nota p{
+    font-size: 12px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 12px;
+    color: #495057;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+}
+.botones > *{ /*Apply to all children*/
+    width: 250px;
+    height: 50px;
+    font-size: 15px;
+    border-radius: 20px;
+    margin: 10px 30px;
+    border: 1px solid  rgb(2, 2, 96);
+
+}
+#encriptar{
+    background: #0A3871;
+    color: white;
+}
+#desencriptar{
+    background: #D8DFE8;
+    color: #0A3871;
+    font-weight: 500;
+}
+
+.caja-salida{
+    width: 400px;
+    height: 800px;
+    background: white;
+    background-image: url("imagenes/Muneco.png");
+    background-size:80%;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    border-radius: 24px;
+    display: inline;
+    box-shadow: 5px 5px 100px 0 rgb(216, 216, 216);
+    position: relative;
+    bottom: 50px;
+    justify-items: middle;
+}
+
+#caja-salida:focus{
+    outline: none;
+}
+#texto-salida{
+    margin: 20px 20px 0;
+    width: 360px;
+    height: 400px;
+    background: transparent;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 150%;
+    color: #495057;
+    border: none;
+}
+#texto-salida:focus{
+    outline: none;
+}
+
+#mensaje-salida1{
+    padding: 0 10px;
+    font-style: normal;
+    font-weight: bolder;
+    font-size: 28px;
+    line-height: 125%;
+    text-align: center;
+    color: #343A40;
+    background: transparent;
+    position:relative;
+    top: 120px;
+}
+
+#mensaje-salida2{
+    padding: 0 10px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: #495057;
+    background: transparent;
+    position:relative;
+    top: 100px;
+    margin:25px 0;
+
+}
+#copiar{
+    position: relative;
+    top: 280px;
+    left: 18%;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    color: #0b4996;
+    border: black;
+    font-size: 15px;
+    border-radius: 20px;
+    width: 250px;
+    height: 50px;
+    background: white;
+    border: 1px solid  rgb(2, 2, 96);
+    display: none;
+}
+
+@media screen and (max-width:414px) {
+    *{
+        margin: 0;
+        padding: 0;
+        width: auto;
+        max-width: 414px;
+    }
+    header{
+        margin: 40px 20px;
+        left: 10px;
+        top: 20px;
+    }
+    #logo{
+        width: 7%;
+    }
+
+    main{
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        width: auto;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .main > *{
+        width: inherit;
+        height: auto;
+    }
+
+    #mensaje-entrada{
+        padding-left:20px;
+        height: auto;
+        width: auto;
+    }
+
+    .caja-salida{
+        margin: 0;
+        margin-top: 20px;
+        padding: 0;
+        width: 400px;
+        height: 150px;
+        background-image: none;
+        position: inherit;
+        display: flex;
+        flex-direction: column;
+
+    }
+    .caja-salida >* {
+        top: 0;
+        left: 0;
+    }
+    #texto-salida{
+        width: 380px;
+        margin: 10px;
+        font-size: 18px;
+        font-weight: 600;
+        display: none;
+    }
+    #mensaje-salida1, #mensaje-salida2{
+        top: 20px;
+        line-height: 1.2;
+        margin: 0;
+    }
+
+    #copiar{
+        margin: 0;
+        width: 100%;
+        position: relative;
+        top: 60px;
+        left: 0;
+        justify-content: center;
+        align-content: center;
+        flex-wrap: wrap;
+        height: 250px;
+        display: none;
+
+    }
+
+}

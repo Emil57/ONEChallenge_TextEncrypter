@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Challenge ONE - Encriptador de Texto</title> 
+        <link rel="stylesheet" href="reset.css">
+        <link rel="stylesheet" href="styles.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&display=swap" rel="stylesheet">
+    </head>
+    
+    <body>
+        <header class="encabezado">
+            <img id="logo" src="imagenes/logo1.png" alt="Logo de Alura Latam">
+        </header>
+
+        <main>
+            <section class="caja-entrada">
+                <textarea id="mensaje-entrada" cols="30" rows="10" placeholder="Ingresa tu mensaje..." onkeyup='this.value=this.value.toLowerCase();'></textarea>
+                <div class="nota">
+                    <img id="signo-exclamacion" src="imagenes/Vector.png" alt="Signo de exclamacion">
+                    <p>Solo letras minúsculas y sin acentos</p>
+                </div> 
+
+                <div class="botones">
+                    <button id="encriptar">Encriptar</button>
+                    <button id="desencriptar">Desencriptar</button>
+                </div>
+
+            </section>
+            
+            <section class="caja-salida">
+                <textarea id="texto-salida" cols="30" rows="10"></textarea>
+                <p id="mensaje-salida1">Ningún mensaje fue encontrado</p>
+                <p id="mensaje-salida2">Ingresa el texto que desees encriptar o desencriptar.</p>
+                <button id="copiar">Copiar</button>
+            </section>
+        </main>
+
+        <script>
+            var input = document.querySelector("#mensaje-entrada");
+            var output = document.querySelector("#texto-salida");
+            input.focus();
+            var btnEncriptar = document.querySelector("#encriptar");
+            var btnDesencriptar = document.querySelector("#desencriptar");
+            var frase;
+            var btnCopiar = document.querySelector("#copiar");
+
+            function encriptar(codigo,index){
+                    return ( frase.slice(0,index) + codigo + frase.slice(index+1,frase.length) );
+            }
+            function codificar(){
+                if(!revisarAcentos()){
+                    var codigo = "";
+                    for(var i=0; i<frase.length;i++){
+                        //console.log(frase[i]);
+                        switch(frase[i]){
+                            case "a":
+                                codigo = "ai";
+                            break;
+                            case "e":
+                                codigo = "enter";
+                            break;
+                            case "i":
+                                codigo = "imer";
+                            break;
+                            case "o":
+                                codigo = "ober";
+                            break;
+                            case "u":
+                                codigo = "ufat";
+                            break;
+                            default:
+                                codigo="";
+                            break;
+                        }
+                        //console.log("Texto es: " + codigo);
+                        if(codigo.length > 0){
+                            frase = encriptar(codigo,i);
+                            i+= codigo.length-1;
+                            console.log("Frase es: " + frase);
+                        }
+                    }
+                    //console.log(frase);
+                    revisarMensaje();
+                }
+            }
+
+            function decodificar(){
+                if(!revisarAcentos()){
+                    //console.log("Entra: "+ frase);
+                    var cut;
+                    for(var i = 0; i < frase.length; i++){
+                        var flag = false;
+                        //console.log(frase[i]);
+                        switch(frase[i]){
+                            case "a":
+                                cut = frase.slice(i,i+2);
+                                if(cut == "ai"){
+                                    flag=true;
+                                    codigo = "a";
+                                }
+                            break;
+                            case "e":
+                                cut = frase.slice(i,i+5);
+                                if(cut == "enter"){
+                                    flag=true;
+                                    codigo = "e";
+                                }
+                            break;
+                            case "i":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "imer"){
+                                    flag=true;
+                                    codigo = "i";
+                                }
+                            break;
+                            case "o":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "ober"){
+                                    flag=true;
+                                    codigo = "o";
+                                }
+                            break;
+                            case "u":
+                                cut = frase.slice(i,i+4);
+                                if(cut == "ufat"){
+                                    flag=true;
+                                    codigo = "u";
+                                }
+                            break;
+                            default:
+                                codigo="";
+                            break;
+                        }
+                        //console.log(cut);
+                        if(flag && codigo.length > 0 ){
+                            frase = desencriptar(cut, codigo, i);
+                            i-= codigo.length-1;
+                        }
+                    }
+                    revisarMensaje();
+                }
+                
+            }
+            function desencriptar(cut,codigo,index){
+                return frase.replace(cut,codigo);
+            }
+
+            function copy() {
+                output.select();
+                document.execCommand("copy");
+                //console.log("Copied to Clipboard!");
+            } 
+            function revisarMensaje(){
+                output.value = frase;
+                input.value = '';
+                var cajaSalida = document.querySelector(".caja-salida");
+                var mensajeSalida1 = document.querySelector("#mensaje-salida1");
+                var mensajeSalida2 = document.querySelector("#mensaje-salida2");
+                var textoSalida = document.querySelector("#texto-salida");
+                console.log("Screen width: " + screen.width);
+                if(screen.width > 414){
+                    //Desktop computer
+                    console.log("Entra desktop");
+                    if(output.value != ''){
+                        cajaSalida.style.backgroundImage = 'none';
+                        btnCopiar.style.display = 'block';
+                        mensajeSalida1.style.display = 'none';
+                        mensajeSalida2.style.display = 'none';
+                    }
+                    else{
+                        btnCopiar.style.display = 'none';
+                        mensajeSalida1.style.display = 'block';
+                        mensajeSalida2.style.display = 'block';
+                        cajaSalida.style.backgroundImage = 'url("imagenes/Muneco.png")'; 
+                    } 
+                }
+                else{
+                    //Mobile
+                    console.log("Entra movil");
+                    if(output.value != ''){
+                        textoSalida.style.display = 'flex';
+                        cajaSalida.style.display = 'flex';
+                        cajaSalida.style.height = '150px';
+                        mensajeSalida1.style.display = 'none';
+                        mensajeSalida2.style.display = 'none';
+                        btnCopiar.style.display = 'flex';
+                    }
+                    else{
+                        mensajeSalida1.style.display = 'flex';
+                        mensajeSalida2.style.display = 'flex';
+                        textoSalida.style.display = 'none';
+                        btnCopiar.style.display = 'none';
+                    }
+                }
+
+                
+            }
+            function revisarAcentos(){
+                frase = input.value;
+                for(var i=0; i<frase.length; i++){
+                    //console.log("Revisando " + frase[i]);
+                    if(frase[i] =="á" ||frase[i]=="é"  ||frase[i]=="í" ||frase[i]=="ó" ||frase[i]=="ú"){
+                        alert("Error. No se permiten acentos.");
+                        return true;
+                    }
+                }
+                return false;
+            }
+            btnEncriptar.onclick = codificar;
+            btnDesencriptar.onclick = decodificar;
+            btnCopiar.onclick = copy;
+
+        </script>
+
+    </body>
+</html>
